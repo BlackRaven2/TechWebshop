@@ -1,0 +1,35 @@
+<mat-card class="product-card">
+  <mat-card-header>
+    <mat-card-title>{{ title }}</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="input-group">
+      <mat-form-field appearance="outline" class="product-input">
+        <mat-label>Add new product...</mat-label>
+        <input matInput [(ngModel)]="newProductName">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="product-input">
+        <mat-label>Add new price...</mat-label>
+        <input matInput [(ngModel)]="newProductPrice">
+      </mat-form-field>
+
+      <button mat-flat-button (click)="addProduct()">Add</button>
+    </div>
+
+    <div class="product-grid">
+      <div class="product-item" *ngFor="let product of products">
+        <mat-card class="product-mini-card">
+          <mat-icon class="notfound">close</mat-icon>
+          <mat-card-title>{{ product.name }}</mat-card-title>
+          <mat-card-subtitle>{{ product.price }} Ft</mat-card-subtitle>
+          <button mat-icon-button color="primary" aria-label="Add to basket">
+            <mat-icon>add_shopping_cart</mat-icon>
+          </button>
+        </mat-card>
+      </div>
+    </div>
+
+  </mat-card-content>
+</mat-card>
