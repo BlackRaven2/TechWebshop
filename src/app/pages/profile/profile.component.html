@@ -1,0 +1,68 @@
+<div class="profile-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>User Profile</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <ng-container *ngIf="isLoading; else loadedContent">
+        <div class="loading-container">
+          <p>Loading profile data...</p>
+        </div>
+      </ng-container>
+
+      <ng-template #loadedContent>
+        <ng-container *ngIf="user; else noUser">
+          <div class="profile-info">
+            <div class="avatar-container">
+              <div class="avatar mat-elevation-z2">
+                {{ getUserInitials() }}
+              </div>
+            </div>
+            <div class="user-details">
+              <h3 class="user-name">{{ user.name.firstname }} {{ user.name.lastname }}</h3>
+              <div class="user-email">
+                <mat-icon>email</mat-icon>
+                <span>{{ user.email }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Feltöltött termékek -->
+          <h4>Your Uploaded Products</h4>
+          <div class="product-grid">
+            <div class="product-item" *ngFor="let product of uploadedProducts">
+              <mat-card class="product-mini-card">
+                <mat-card-title>{{ product.name }}</mat-card-title>
+                <mat-card-subtitle>{{ product.price }} USD</mat-card-subtitle>
+              </mat-card>
+            </div>
+            <div *ngIf="uploadedProducts.length === 0">
+              <p>You have no uploaded products.</p>
+            </div>
+          </div>
+
+          <!-- Kosárban lévő termékek -->
+          <h4>Products in Your Basket</h4>
+          <div class="product-grid">
+            <div class="product-item" *ngFor="let product of basketProducts">
+              <mat-card class="product-mini-card">
+                <mat-card-title>{{ product.name }}</mat-card-title>
+                <mat-card-subtitle>{{ product.price }} USD</mat-card-subtitle>
+              </mat-card>
+            </div>
+            <div *ngIf="basketProducts.length === 0">
+              <p>Your basket is empty.</p>
+            </div>
+          </div>
+        </ng-container>
+
+        <ng-template #noUser>
+          <div class="empty-state">
+            <mat-icon>person_off</mat-icon>
+            <p>No user profile found. Please log in.</p>
+          </div>
+        </ng-template>
+      </ng-template>
+    </mat-card-content>
+  </mat-card>
+</div>

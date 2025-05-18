@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="c2">
+    <h1>Welcome to the Tech Webshop</h1>
+    <p>Log in to your account to order anything you fancy instantly. <mat-icon>mood</mat-icon></p>
+    
+    @if (!isLoggedIn) {
+      <button mat-flat-button color="accent" [routerLink]="['/login']" class="products">Login</button>
+    }
+    
+    @if (isLoggedIn) {
+      <button mat-flat-button color="accent" [routerLink]="['/profile']" class="products">My Profile</button>
+    }
+  </div>
+</div>

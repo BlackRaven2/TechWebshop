@@ -1,0 +1,41 @@
+<mat-card class="product-card" [formGroup]="productForm">
+  <mat-card-header>
+    <mat-card-title>{{ title }}</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="input-group">
+
+      <mat-form-field appearance="outline" class="product-input">
+        <mat-label>Add new product...</mat-label>
+        <input matInput formControlName="name" placeholder="Product name">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="product-input">
+        <mat-label>Add new price...</mat-label>
+        <input matInput type="number" formControlName="price" placeholder="Price">
+      </mat-form-field>
+
+      <button mat-flat-button color="primary" (click)="addProduct()">Add</button>
+    </div>
+
+    <div *ngIf="productForm.invalid && productForm.touched" class="error-message">
+      <p *ngIf="productForm.get('name')?.invalid">Név megadása kötelező (legalább 3 karakter).</p>
+      <p *ngIf="productForm.get('price')?.invalid">Ár megadása kötelező.</p>
+    </div>
+
+    <div class="product-grid">
+      <div class="product-item" *ngFor="let product of products">
+        <mat-card class="product-mini-card">
+          <mat-icon class="notfound">close</mat-icon>
+          <mat-card-title>{{ product.name }}</mat-card-title>
+          <mat-card-subtitle>{{ product.price }} USD</mat-card-subtitle>
+          <button mat-icon-button color="primary" aria-label="Add to basket" (click)="addToBasket(product)">
+            <mat-icon>add_shopping_cart</mat-icon>
+          </button>
+        </mat-card>
+      </div>
+    </div>
+
+  </mat-card-content>
+</mat-card>
